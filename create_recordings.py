@@ -1,3 +1,6 @@
+import tempfile
+tempfile.tempdir = "/scratch/lddavila/temp"
+
 import MEArec as mr
 import numpy as np
 import matplotlib.pylab as plt
