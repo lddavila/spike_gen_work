@@ -41,8 +41,8 @@ def extract_recordings(recording_fp,dir_to_save_output):
 
     print(channel_ids)
     for i in channel_ids:
-        channel_data = rec.get_traces(channel_ids=i)
-        mat_dict = {f"channel_{i}": channel_data}
+        channel_data = rec.get_traces(channel_ids=int(i))
+        mat_dict = {f"c_{i}": channel_data}
         savemat(os.path.join(dir_to_save_output,"recordings_by_channel",f"c{i}.mat"), mat_dict)
         print(f"Saved channel {i} data to {os.path.join(dir_to_save_output,'recordings_by_channel',f'channel_{i}.mat')}")
 
