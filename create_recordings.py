@@ -1,5 +1,5 @@
 import tempfile
-tempfile.tempdir = "/scratch/lddavila/temp"
+tempfile.tempdir = "/scratch/afriedman/temp"
 
 import MEArec as mr
 import numpy as np
