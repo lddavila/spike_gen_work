@@ -39,22 +39,29 @@ def extract_recordings(recording_fp,dir_to_save_output):
     channel_ids = rec.get_channel_ids()
     print("Finished getting channel ids for "+ recording_fp)
 
-    print(channel_ids)
-    for i in channel_ids:
-        channel_data = rec.get_traces(channel_ids=[i])
-        mat_dict = {f"c_{i}": channel_data}
-        savemat(os.path.join(dir_to_save_output,"recordings_by_channel",f"c{i}.mat"), mat_dict)
-        print(f"Saved channel {i} data to {os.path.join(dir_to_save_output,'recordings_by_channel',f'channel_{i}.mat')}")
+    #print(channel_ids)
+    #for i in channel_ids:
+    #    channel_data = rec.get_traces(channel_ids=[i])
+    #    mat_dict = {f"c_{i}": channel_data}
+    #    savemat(os.path.join(dir_to_save_output,"recordings_by_channel",f"c{i}.mat"), mat_dict)
+    #    print(f"Saved channel {i} data to {os.path.join(dir_to_save_output,'recordings_by_channel',f'channel_{i}.mat')}")
 
-    timestamps = rec.get_times()
-    savemat(os.path.join(dir_to_save_output,"timestamps","timestamps.mat"), {"timestamps": timestamps})
-    print(f"Saved timestamps to {os.path.join(dir_to_save_output,'timestamps','timestamps.mat')}")
+    #timestamps = rec.get_times()
+    #savemat(os.path.join(dir_to_save_output,"timestamps","timestamps.mat"), {"timestamps": timestamps})
+    #print(f"Saved timestamps to {os.path.join(dir_to_save_output,'timestamps','timestamps.mat')}")
 
     sorting = se.MEArecSortingExtractor(recording_fp)
     print("Finished loading sorting extractor for "+ recording_fp)
     
-    ground_truth = sorting.get_unit_ids()
-    ground_truth_dict = {f"unit_{i}": sorting.get_unit_spike_train(i) for i in ground_truth}
+    ground_truth_unit_ids = sorting.get_unit_ids()
+    print("Ground truth unit ids:")
+    print(ground_truth_unit_ids)
+    ground_truth_array = [];
+    for i in ground_truth_unit_ids:
+        ground_truth_array.append(sorting.get_unit_spike_train(i))
+        print(ground_truth_array);
+        print(f"Unit {i} has {len(sorting.get_unit_spike_train(i))} spikes")
+    ground_truth_dict = {"unit_ids": ground_truth_unit_ids, "spike_trains": ground_truth_array};
     savemat(os.path.join(dir_to_save_output,"ground_truth","ground_truth.mat"), ground_truth_dict)
     print(f"Saved ground truth to {os.path.join(dir_to_save_output,'ground_truth','ground_truth.mat')}")
 
