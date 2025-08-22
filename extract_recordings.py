@@ -61,7 +61,7 @@ def extract_recordings(recording_fp,dir_to_save_output):
         ground_truth_array.append(sorting.get_unit_spike_train(i))
         print(ground_truth_array);
         print(f"Unit {i} has {len(sorting.get_unit_spike_train(i))} spikes")
-    ground_truth_dict = {"unit_ids": ground_truth_unit_ids, "spike_trains": ground_truth_array};
+    ground_truth_dict = {"spike_trains": ground_truth_array};
     savemat(os.path.join(dir_to_save_output,"ground_truth","ground_truth.mat"), ground_truth_dict)
     print(f"Saved ground truth to {os.path.join(dir_to_save_output,'ground_truth','ground_truth.mat')}")
 
