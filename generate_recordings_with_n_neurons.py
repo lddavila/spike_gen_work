@@ -24,6 +24,6 @@ def generate_recordings_with_n_neurons(num_of_exc,num_of_inh,length_of_rec,noise
     #recording_params['recordings']['seed'] = 0
 
     recording_params['spiketrains']['duration'] = length_of_rec
-    recgen = mr.gen_recordings(templates=templates_filename, params=recording_params)
+    recgen = mr.gen_recordings(templates=templates_filename, params=recording_params,verbose=True)
     # save recording
     mr.save_recording_generator(recgen, save_name_of_rec)
